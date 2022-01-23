@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": ["plugin:@angular-eslint/recommended"],
+      "rules": {
+        "quotes": ["error", "single"],
+        "prefer-const": ["error"],
+        "no-var": ["error"],
+        "lines-between-class-members": ["error", "never"],
+        "@typescript-eslint/explicit-member-accessibility": ["error"],
+        "comma-dangle": ["error", "never"],
+        "curly": ["error", "all"]
+      }
+    }
+  ]
+}
