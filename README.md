@@ -18,8 +18,6 @@ npm i @lunarade/locki
 
 ## Usage
 
-Usage:
-
 ```ts
 import { LockiClient } from '@lunarade/locki';
 
