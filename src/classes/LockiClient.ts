@@ -22,6 +22,9 @@ export class LockiClient extends EventEmitter {
         // This is required to enable auto-reconnect
         this.redis.on('error', (e: Error) => this.emit('redis-client-error', e));
     }
+    public async connect() {
+        return await this.redis.connect();
+    }
     public on(event: RedisLockClientEvent, cb: () => any) {
         return super.on(event, cb);
     }
