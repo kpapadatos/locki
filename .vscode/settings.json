@@ -7,6 +7,7 @@
   "terminal.integrated.defaultProfile.windows": "JavaScript Debug Terminal",
   "terminal.integrated.defaultProfile.linux": "JavaScript Debug Terminal",
   "terminal.integrated.defaultProfile.osx": "JavaScript Debug Terminal",
+  "[markdown]": { "editor.formatOnSave": false, "editor.formatOnType": false },
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.codeActionsOnSave": {

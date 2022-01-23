@@ -64,7 +64,7 @@ describe('session', () => {
 
     function mutate(r: Resource, v: number = r.v, options?: Partial<IRedisLockSessionOptions>) {
         const deferred = defer();
-        const mutator = client.withLock(async (isLockOwned) => {
+        const mutator = client.withLocks(async (isLockOwned) => {
             await sleep(100);
 
             if (!isLockOwned()) {

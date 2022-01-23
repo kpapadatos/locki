@@ -24,7 +24,7 @@ export class RedisLockClient extends EventEmitter {
     public on(event: RedisLockClientEvent, cb: () => any) {
         return super.on(event, cb);
     }
-    public async withLock<T>(fn: RedisLockSessionFn<T>, options: Partial<IRedisLockSessionOptions>) {
+    public async withLocks<T>(fn: RedisLockSessionFn<T>, options: Partial<IRedisLockSessionOptions>) {
         const defaultOptions: IRedisLockSessionOptions = {
             renewIntervalMs: 2e3,
             ttlMs: 30e3,
