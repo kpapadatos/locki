@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="logo/logo.png"/><br>
+    <img src="https://user-images.githubusercontent.com/3382344/150687699-b75b87ef-e0ed-47a5-9ed7-fd24db135527.png"/><br>
     <img src="https://img.shields.io/badge/coverage-98.73%25-green"/>
     <img src="https://img.shields.io/badge/build-passing-green"/>
 </div>
