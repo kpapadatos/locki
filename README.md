@@ -38,7 +38,6 @@ import { LockiClient } from '@lunarade/locki';
 
       // Lock TTL to set on every renew. Default: 30e3
       ttlMs: 30e3,
-
       
       endCallback: () => {
         // Will be called on end, or when the lock can no longer
