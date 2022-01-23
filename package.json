@@ -1,6 +1,6 @@
 {
   "name": "@lunarade/locki",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A redis-backed lock broker that manages groups of S/X locks with atomic lua scripts.",
   "main": "./dist/src/main.js",
   "keywords": [
@@ -12,9 +12,6 @@
     "consistency",
     "locki"
   ],
-  "bin": {
-    "main-cli": "./bin/main.js"
-  },
   "scripts": {
     "dev": "ts-node scripts/dev.ts",
     "nodemon": "nodemon -w dist --delay 500ms --ext js --exec  \"node -r source-map-support/register dist/src/main.js\"",
