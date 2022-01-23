@@ -1,15 +1,11 @@
 import { assert, expect } from 'chai';
-import { randomBytes } from 'crypto';
 import { sleep } from '../src/common/sleep';
-import { RedisLockClient } from '../src/main';
+import { getSKey, getSTTL, getXKey, getXTTL, lockS, lockX, randStr } from './common/helpers';
+import client from './common/testClient';
 
-describe('lockxs', () => {
-    const { redis } = RedisLockClient.create();
+const { redis } = client;
 
-    before(async () => {
-        await redis.connect();
-    });
-
+describe('lock', () => {
     it('should lock', async () => {
         const ttlMs = 1000;
         const exclusive = [randStr()];
@@ -42,7 +38,7 @@ describe('lockxs', () => {
         assert.equal(1, await lockX(shared[0]));
     });
 
-    it('it should extend', async () => {
+    it('should extend', async () => {
         const ttlMs = 1000;
         const exclusive = [randStr()];
         const shared = [randStr(), randStr()];
@@ -67,7 +63,7 @@ describe('lockxs', () => {
         expect(await getSTTL(shared[0], secret)).eq(10);
     });
 
-    it('it should release', async () => {
+    it('should release', async () => {
         const ttlMs = 1000;
         const exclusive = [randStr()];
         const shared = [randStr(), randStr()];
@@ -121,50 +117,4 @@ describe('lockxs', () => {
         assert.equal(await getSKey(sharedKey, secretA), null);
         assert.equal(await getSKey(sharedKey, secretB), null);
     });
-
-    async function getXTTL(key: string) {
-        return await redis.ttl(buildXKey(key));
-    }
-
-    async function getSTTL(key: string, secret: string) {
-        return await redis.ttl(buildSKey(key, secret));
-    }
-
-    async function getXKey(key: string) {
-        return await redis.get(buildXKey(key));
-    }
-
-    async function getSKey(key: string, secret: string) {
-        return await redis.get(buildSKey(key, secret));
-    }
-
-    function buildXKey(key: string) {
-        return `x_${key}`;
-    }
-
-    function buildSKey(key: string, secret: string) {
-        return `s_${key}_${secret}`;
-    }
-
-    async function lockX(str: string, secret?: string) {
-        return await redis.lockXS({
-            ttlMs: '1000',
-            secret: secret || randStr(),
-            exclusive: [str],
-            shared: []
-        })
-    }
-
-    async function lockS(str: string, secret?: string) {
-        return await redis.lockXS({
-            ttlMs: '1000',
-            secret: secret || randStr(),
-            exclusive: [],
-            shared: [str]
-        })
-    }
-
-    function randStr() {
-        return randomBytes(16).toString('hex');
-    }
 })

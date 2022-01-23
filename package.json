@@ -1,5 +1,5 @@
 {
-  "name": "@lunarade/rlockxs",
+  "name": "@lunarade/locki",
   "version": "1.0.0",
   "description": "A redis-backed lock broker that manages groups of S/X locks with atomic lua scripts.",
   "main": "./dist/src/main.js",
@@ -13,7 +13,8 @@
     "clean": "mkdirp dist && del-cli -f dist && mkdirp dist",
     "test": "tsc && mocha -r source-map-support/register --timeout 50000 dist/tests/**/*.test.js",
     "test-w": "ts-node scripts/test-w.ts",
-    "mocha-watch-js": "mocha -r source-map-support/register --timeout 50000 --watch --watch-files dist dist/tests/**/*.test.js"
+    "mocha-watch-js": "mocha -r source-map-support/register --timeout 50000 --watch --watch-files dist dist/tests/**/*.test.js",
+    "coverage": "nyc --exclude src/tests/** -r lcov -e .ts -x \"*.ts\" npm run test"
   },
   "author": {
     "email": "k.papadatos@pobuca.com",
