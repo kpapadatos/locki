@@ -4,3 +4,7 @@ node_modules
 /scripts
 /coverage
 /logo
+/.eslintrc.json
+/bin
+/.vscode
+/.nyc_output
