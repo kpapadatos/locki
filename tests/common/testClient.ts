@@ -1,5 +1,5 @@
-import { RedisLockClient } from '../../src/main';
+import { LockiClient } from '../../src/main';
 
-const client = RedisLockClient.create();
+const client = LockiClient.create();
 
 export default client;

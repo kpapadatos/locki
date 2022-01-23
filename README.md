@@ -21,10 +21,10 @@ npm i @lunarade/locki
 Usage:
 
 ```ts
-import { RedisLockClient } from '@lunarade/locki';
+import { LockiClient } from '@lunarade/locki';
 
 (async () => {
-  const client = await RedisLockClient.create();
+  const client = await LockiClient.create();
 
   await client.connect();
 

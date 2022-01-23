@@ -1,4 +1,4 @@
 
-export * from './classes/RedisLockClient';
-export * from './classes/RedisLockSession';
+export * from './classes/AtomicSession';
+export * from './classes/LockiClient';
 

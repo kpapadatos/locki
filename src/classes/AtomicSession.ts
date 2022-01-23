@@ -1,13 +1,13 @@
 import { randomBytes } from 'crypto';
 import { sleep } from '../common/sleep';
-import { RedisLockClient } from './RedisLockClient';
+import { LockiClient } from './LockiClient';
 
-export default class RedisLockSession<T> {
+export default class AtomicSession<T> {
     public static async start<T>(
         fn: RedisLockSessionFn<T>,
         options: IRedisLockSessionOptions
     ) {
-        const session = new RedisLockSession(fn, options);
+        const session = new AtomicSession(fn, options);
 
         return await session.resolve();
     }
@@ -95,7 +95,7 @@ export interface IRedisLockSessionOptions {
      * an error, or normally.
      */
     endCallback?: CallableFunction;
-    client: RedisLockClient;
+    client: LockiClient;
     exclusive: string[];
     shared: string[];
 }

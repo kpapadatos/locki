@@ -3,20 +3,21 @@ import { createClient } from 'redis';
 import { extendXS } from '../lua/extendXS';
 import { lockXS } from '../lua/lockXS';
 import { releaseXS } from '../lua/releaseXS';
-import RedisLockSession, { IRedisLockSessionOptions, RedisLockSessionFn } from './RedisLockSession';
+import AtomicSession, { IRedisLockSessionOptions, RedisLockSessionFn } from './AtomicSession';
 
-export class RedisLockClient extends EventEmitter {
-    public static create(options?: Parameters<typeof createClient>) {
-        return new RedisLockClient(options);
+export class LockiClient extends EventEmitter {
+    public static create(options?: Parameters<typeof createClient>[0]) {
+        return new LockiClient(options);
     }
     public readonly redis;
-    private constructor(options?: Parameters<typeof createClient>) {
+    private constructor(options?: Parameters<typeof createClient>[0]) {
         super();
 
-        this.redis = createClient({
-            scripts: { lockXS, extendXS, releaseXS },
-            ...options
-        });
+        const redisOptions = { scripts: { lockXS, extendXS, releaseXS } }
+
+        Object.assign(redisOptions, options);
+
+        this.redis = createClient(redisOptions);
 
         // This is required to enable auto-reconnect
         this.redis.on('error', (e: Error) => this.emit('redis-client-error', e));
@@ -33,7 +34,7 @@ export class RedisLockClient extends EventEmitter {
             shared: []
         }
 
-        return await RedisLockSession.start(fn, { ...defaultOptions, ...options });
+        return await AtomicSession.start(fn, { ...defaultOptions, ...options });
     }
 }
 
