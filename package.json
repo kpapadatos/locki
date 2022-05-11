@@ -1,6 +1,6 @@
 {
   "name": "@lunarade/locki",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A redis-backed lock broker that manages groups of S/X locks with atomic lua scripts.",
   "main": "./dist/src/main.js",
   "keywords": [
@@ -51,6 +51,6 @@
   },
   "dependencies": {
     "moment": "^2.29.1",
-    "redis": "^4.0.2"
+    "redis": "4.0.2"
   }
 }
